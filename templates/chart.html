@@ -1,53 +1,110 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-</head>
-<body>
-<div>
-    <canvas id="myChart" width="400" height="400"></canvas>
-</div>
-<script>
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-        datasets: [{
-            label: '# of Votes',
-            data: [17.37, 39.18, 80.74, 118.93, 149.58, 131.54, 123.9, 116.8, 79.52, 61.84, 33.45, 19.27],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {responsive: false,
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
+{% extends "layout.html" %}
+
+    {% block content %}
+        <div class="row">
+            <div class="col">
+                <h6 style="text-align: center;">Peak Sunshine Hours</h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <canvas id="myChart" width="50" height="40"></canvas>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col">
+                <table class="table table-condensed" style="font-size: 5px;">
+                    <thead>
+                      <tr>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Email</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>John</td>
+                        <td>Doe</td>
+                        <td>john@example.com</td>
+                      </tr>
+                      <tr>
+                        <td>Mary</td>
+                        <td>Moe</td>
+                        <td>mary@example.com</td>
+                      </tr>
+                      <tr>
+                        <td>July</td>
+                        <td>Dooley</td>
+                        <td>july@example.com</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+    {% endblock %}
+    
+    {% block script %}
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                //labels: [1, 3, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                labels: {{month_data}},
+                datasets: [{
+                    label: false,
+                    //data: [17.37, 39.18, 80.74, 118.93, 149.58, 131.54, 123.9, 116.8, 79.52, 61.84, 33.45, 19.27],
+                    data: {{irrad_data}},
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {responsive: true,
+                scales: {
+                    yAxes: [{scaleLabel: {
+                        display: true,
+                        labelString: 'peak sun hours'
+                        },
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                    xAxes: [{
+                        scaleLabel: {
+                        display: true,
+                        labelString: 'month'
+                        }
+                    }],
                 }
-            }]
-        }
-    }
-});
-</script>
-</body>
-</html>
+            }
+        });
+    </script>
+    {% endblock%}

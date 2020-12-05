@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  {% block head %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--chart.js link-->
@@ -14,7 +15,8 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 
-    <title>peak sunshine hours: {%title%}</title>
+    <title>peak sunshine hours: {{title}}</title>
+  {% endblock %}
 </head>
 <body>
   <nav style="height:auto" class="navbar navbar-expand-md bg-dark navbar-dark">
@@ -42,12 +44,22 @@
     </div>
   </nav>
       
-    <main class = "container" style="height: 80vh; background-color: green">
-        <p>main</p>
+    <main class = "container" style="height: 80vh">
+      {% block content %}
+
+      {% endblock %}
     </main>
 
     <footer class="container-fluid" style="height: 10vh;">
+      {% block footer%}
         <p>footer</p>
+      {% endblock %}
     </footer>
+
+    {% block script%}{% endblock %}
+    
+  </body>
+</html>
+
 
     
