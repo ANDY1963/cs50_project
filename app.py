@@ -24,6 +24,6 @@ def peak_sun():
         # Call helper function from helpers.py; return value is a tuple of two lists
         data = contact_API(lat, lon)
         
-        return render_template("chart.html", title = "chart", irrad_data = data[0], month_data = data[1])
+        return render_template("chart.html", title = "chart", irrad_data = data[0], month_data = data[1], lat=lat, lon=lon)
 
         

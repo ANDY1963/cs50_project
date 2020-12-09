@@ -10,7 +10,7 @@ def contact_API(lat, lon):
     response = requests.get(f"https://re.jrc.ec.europa.eu/api/MRcalc?startyear=2016&endyear=2016&lat={lat}&lon={lon}&outputformat=json&browser=1&horirrad=1")
     # json method gets data from the object
     data = response.json()
-
+    #(data["message"])
     # Extract list of output dicts for each month
     output_list = data["outputs"]["monthly"]
 

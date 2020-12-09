@@ -1,43 +1,30 @@
 {% extends "layout.html" %}
 
     {% block content %}
+        <h6 style="text-align: center; color: rgb(88, 100, 112);">lat = {{lat}}&deg; &nbsp lon = {{lon}}&deg;</h6>
         <div class="row">
             <div class="col">
-                <h6 style="text-align: center;">Peak Sunshine Hours</h6>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <canvas id="myChart" width="50" height="40"></canvas>
+                <canvas id="myChart" width="50" height="30"></canvas>
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col">
-                <table class="table table-condensed" style="font-size: 5px;">
+                <table class="table table-condensed" style="font-size: 10px;">
                     <thead>
                       <tr>
-                        <th>Firstname</th>
-                        <th>Lastname</th>
-                        <th>Email</th>
+                        <th>month</th>
+                        <th>sun hours</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>john@example.com</td>
-                      </tr>
-                      <tr>
-                        <td>Mary</td>
-                        <td>Moe</td>
-                        <td>mary@example.com</td>
-                      </tr>
-                      <tr>
-                        <td>July</td>
-                        <td>Dooley</td>
-                        <td>july@example.com</td>
-                      </tr>
+
+                    {% for i in range(month_data|length) %}
+                    <tr>
+                        <td>{{month_data[i]}}</td><td>{{irrad_data[i]}}</td>
+                    </tr>
+                    {% endfor %}
+
                     </tbody>
                   </table>
             </div>
@@ -50,44 +37,48 @@
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                //labels: [1, 3, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+            // jinja to plug in python lists of plot data passed to this template
                 labels: {{month_data}},
                 datasets: [{
                     label: false,
-                    //data: [17.37, 39.18, 80.74, 118.93, 149.58, 131.54, 123.9, 116.8, 79.52, 61.84, 33.45, 19.27],
                     data: {{irrad_data}},
+                    
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
+                    'rgba(31, 131, 237, 0.2)',
+                    'rgba(31, 131, 237, 0.2)',
+                    'rgba(31, 131, 237, 0.2)',
+                    'rgba(31, 131, 237, 0.2)',
+                    'rgba(31, 131, 237, 0.2)',
+                    'rgba(31, 131, 237, 0.2)',
+                    'rgba(31, 131, 237, 0.2)',
+                    'rgba(31, 131, 237, 0.2)',
+                    'rgba(31, 131, 237, 0.2)',
+                    'rgba(31, 131, 237, 0.2)',
+                    'rgba(31, 131, 237, 0.2)',
+                    'rgba(31, 131, 237, 0.2)',
+                    
                     ],
                     borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)',
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
+                        'rgba(10,100,255, 1)',
+                        'rgba(10,100,255, 1)',
+                        'rgba(10,100,255, 1)',
+                        'rgba(10,100,255, 1)',
+                        'rgba(10,100,255, 1)',
+                        'rgba(10,100,255, 1)',
+                        'rgba(10,100,255, 1)',
+                        'rgba(10,100,255, 1)',
+                        'rgba(10,100,255, 1)',
+                        'rgba(10,100,255, 1)',
+                        'rgba(10,100,255, 1)',
+                        'rgba(10,100,255, 1)',
+                        ],
                     borderWidth: 1
                 }]
             },
             options: {responsive: true,
+                legend: {
+                display: false
+                },
                 scales: {
                     yAxes: [{scaleLabel: {
                         display: true,

@@ -6,22 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--chart.js link-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <!--jquery must be above BS link-->
+    <!--jquery MUST be above BS link as BS needs it-->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <!--bootswatch themed copy of BS4-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/darkly/bootstrap.min.css">
+    <!--My style sheet-->
+    <link rel="stylesheet" href="../static/myStyles.css">
     <!--BS javascript-->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 
-    <title>peak sunshine hours: {{title}}</title>
+    <title>peak sun hours: {{title}}</title>
   {% endblock %}
 </head>
 <body>
   <nav style="height:auto" class="navbar navbar-expand-md bg-dark navbar-dark">
     <!-- Brand -->
-    <a class="navbar-brand" href="#">peak sun hours</a>
+    <a class="navbar-brand" id="brand"  href="/">peak sun hours</a>
   
     <!-- Toggler/collapsibe Button -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -32,29 +34,26 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="#">login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">register</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">home</a>
+          <a class="nav-link" id="home" href="/">home</a>
         </li>
       </ul>
     </div>
   </nav>
       
-    <main class = "container" style="height: 80vh">
-      {% block content %}
-
-      {% endblock %}
-    </main>
-
-    <footer class="container-fluid" style="height: 10vh;">
-      {% block footer%}
-        <p>footer</p>
-      {% endblock %}
-    </footer>
+    <div  style="min-height: 90vh;">
+      <main class = "container" style="min-height: 80vh;">
+        <!--Use min-height for main content container to push following footer container
+         down if content does not fill page (like with index.html view).
+         But if content more than 100vh (like chart and table view) the content itself pushes footer down-->
+        {% block content %}
+  
+        {% endblock %}
+      </main>
+  
+      <footer class="container-fluid bg-dark" style="text-align: center; min-height: 10vh; padding-top: 20px;">
+        <a style="color: brown;" href="https://ec.europa.eu/jrc/en/pvgis">data &nbsp;from &nbsp;PVGIS;</a>
+      </footer>
+    </div>
 
     {% block script%}{% endblock %}
     
