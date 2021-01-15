@@ -1,5 +1,5 @@
 from helpers import contact_API
-from flask import Flask, flash, jsonify, redirect, render_template, request, session
+from flask import Flask, jsonify, render_template, request
 #from flask_session import Session
 from flask import Flask
 app = Flask(__name__)
